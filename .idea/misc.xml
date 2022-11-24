@@ -3,15 +3,18 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/drawable/bg_circle_indicator.xml" value="0.1115" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/drawable/ic_person_24.xml" value="0.1115" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/fragment_dashboard.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/fragment_home.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/fragment_on_boarding.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/fragment_profile.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/fragment_task.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/item_task.xml" value="0.20416666666666666" />
-        <entry key="..\:/Users/dania/AndroidStudioProjects/TaskManager4_13/app/src/main/res/layout/item_view_pager.xml" value="0.203125" />
+        <entry key="app/src/main/res/drawable/bg_circle_indicator.xml" value="0.123" />
+        <entry key="app/src/main/res/drawable/bg_et.xml" value="0.123" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2937118530273437" />
+        <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/fragment_on_boarding.xml" value="0.1936619718309859" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.2947916666666667" />
+        <entry key="app/src/main/res/layout/fragment_task.xml" value="0.22357723577235772" />
+        <entry key="app/src/main/res/layout/item_task.xml" value="0.30885416666666665" />
+        <entry key="app/src/main/res/layout/item_view_pager.xml" value="0.2328178228333939" />
+        <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2065694173177083" />
       </map>
     </option>
   </component>

@@ -10,8 +10,10 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
+import com.geektech.taskmanager.R
+import com.geektech.taskmanager.data.local.Pref
+import com.geektech.taskmanager.databinding.ActivityMainBinding
 import com.geektech.taskmanager4_1.data.local.infor
-import com.geektech.taskmanager4_1.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,7 +34,7 @@ class MainActivity : AppCompatActivity() {
 
         // if user had seen -> homeFragment
         // else navigate to onBoarding
-
+        //15 min
         if (!infor.isOnBoardingShow()){
             navController.navigate(R.id.onBoardingFragment)
         }
