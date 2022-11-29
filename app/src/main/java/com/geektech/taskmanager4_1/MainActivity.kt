@@ -4,21 +4,17 @@ import android.os.Bundle
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.geektech.taskmanager.R
-import com.geektech.taskmanager.data.local.Pref
-import com.geektech.taskmanager.databinding.ActivityMainBinding
-import com.geektech.taskmanager4_1.data.local.infor
+import com.example.taskmanager.data.local.Pref
+import com.example.taskmanager.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var infor: infor
+    private lateinit var pref: Pref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,16 +22,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        infor = infor(this)
-
         val navView: BottomNavigationView = binding.navView
+        pref = Pref(this)
 
         val navController = findNavController(R.id.nav_host_fragment_activity_main)
-
-        // if user had seen -> homeFragment
-        // else navigate to onBoarding
-        //15 min
-        if (!infor.isOnBoardingShow()){
+        if (pref.isOnBoardingShow()) {
             navController.navigate(R.id.onBoardingFragment)
         }
 
@@ -44,36 +35,26 @@ class MainActivity : AppCompatActivity() {
                 R.id.navigation_home,
                 R.id.navigation_dashboard,
                 R.id.navigation_notifications,
-                R.id.taskFragment,
-                R.id.profileFragment
+                R.id.taskFragment
             )
         )
-
         val bottomFragments = arrayListOf(
             R.id.navigation_home,
             R.id.navigation_dashboard,
             R.id.navigation_notifications,
-            R.id.taskFragment,
+            R.id.navigation_profile
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
-
-        navController.addOnDestinationChangedListener(object :
-            NavController.OnDestinationChangedListener {
-            override fun onDestinationChanged(
-                controller: NavController,
-                destination: NavDestination,
-                arguments: Bundle?
-            ) {
-                navView.isVisible = bottomFragments.contains(destination.id)
-
-                if (destination.id == R.id.onBoardingFragment) {
-                    supportActionBar?.hide()
-                } else {
-                    supportActionBar?.show()
-                }
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            navView.isVisible = bottomFragments.contains(destination.id)
+            if (destination.id == R.id.onBoardingFragment) {
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
             }
-        })
+        }
+
     }
 }

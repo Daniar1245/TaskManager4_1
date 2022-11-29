@@ -1,24 +1,33 @@
 package com.geektech.taskmanager4_1.ui.task.adapter
 
 import android.annotation.SuppressLint
-import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.FragmentActivity
+import androidx.core.graphics.drawable.toDrawable
 import androidx.recyclerview.widget.RecyclerView
-import com.geektech.taskmanager.App
-import com.geektech.taskmanager.databinding.ItemTaskBinding
-import com.geektech.taskmanager.data.model.Task
+import com.example.taskmanager.App
+import com.example.taskmanager.R
+import com.example.taskmanager.databinding.ItemHomeBinding
+import com.example.taskmanager.data.models.Task
+import com.geektech.taskmanager4_1.App
 import com.geektech.taskmanager4_1.data.model.Task
 
-class TaskAdapter(private val taskList: ArrayList<Task> = arrayListOf(), val context:Context, val activity: FragmentActivity?) :
+class TaskAdapter(
+    val onLongClick: (position: Int) -> Unit,
+    val onClick: (Task) -> Unit
+) :
     RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+    private val taskList: ArrayList<Task> = arrayListOf()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
         return TaskViewHolder(
-            ItemTaskBinding.inflate(
-                LayoutInflater.from(parent.context), parent, false
+            ItemHomeBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
             )
         )
     }
@@ -27,44 +36,63 @@ class TaskAdapter(private val taskList: ArrayList<Task> = arrayListOf(), val con
         holder.bind(taskList[position])
     }
 
-    override fun getItemCount() = taskList.size
-
-    inner class TaskViewHolder(private val binding: ItemTaskBinding) :
-        RecyclerView.ViewHolder(binding.root) {
-        fun bind(task: Task) {
-            binding.tvTitle.text = task.title
-            binding.tvDescription.text = task.description
-
-            itemView.setOnLongClickListener{
-                createAlertDialog(task)
-                return@setOnLongClickListener true
-            }
-        }
+    override fun getItemCount(): Int {
+        return taskList.size
     }
 
-    fun createAlertDialog(task: Task){
-        val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Delete task")
-        alertDialogBuilder.setMessage("Are you sure, you want to delete the task?")
-        alertDialogBuilder.setPositiveButton("Yes"){ _, _ ->
-            App.dataBase.taskDao().delete(task)
-            activity?.recreate()
-        }
-        alertDialogBuilder.setNegativeButton("No"){ dialog, _ ->
-            dialog.dismiss()
-        }
-        alertDialogBuilder.show()
-    }
-
-//    fun addTask(task: Task) {
-//        taskList.add(0, task)
-//        notifyItemChanged(0)
-//    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    fun addTasks(tasks: List<Task>){
+    fun addTasks(newTasks: List<Task>) {
         this.taskList.clear()
-        this.taskList.addAll(tasks)
+        this.taskList.addAll(newTasks)
         notifyDataSetChanged()
     }
+
+    fun deleteTask(task: Task) {
+        App.db.taskDao().delete(task)
+    }
+
+
+    /* fun taskColor(taskList: List<Task>){
+         for (i in)
+             this.taskList[2].
+     }*/
+
+    fun sendTask(position: Int): Task {
+        return taskList[position]
+    }
+
+
+    inner class TaskViewHolder(private val binding: ItemHomeBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+
+
+
+        @SuppressLint("ResourceAsColor")
+        fun bind(task: Task) {
+            itemView.setOnLongClickListener {
+                onLongClick(adapterPosition)
+
+                return@setOnLongClickListener false
+            }
+            for (i in 1 until taskList.size step 2){
+                if (adapterPosition == i){
+                    itemView.setBackgroundColor(Color.BLACK)
+                    binding.textDesc.setTextColor(Color.WHITE)
+                    binding.textTitle.setTextColor(Color.WHITE)
+
+                }
+            }
+
+
+            itemView
+            binding.root.setOnClickListener{
+                onClick(task)
+            }
+            binding.textTitle.text = task.title
+            binding.textDesc.text = task.desc
+
+        }
+
+
+    }
+
 }
